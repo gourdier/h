@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pi Archive</title>
+
+<style>
+* {
+  touch-action: manipulation;
+}
+:root{
+    --bg:#ffffff;
+    --text:#000000;
+    --border:#cfcfcf;
+    --hover:#f5f5f5;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:system-ui,sans-serif;
+}
+
+body{
+    background:var(--bg);
+    color:var(--text);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+header{
+    padding:18px;
+    border-bottom:1px solid var(--border);
+    font-size:1.3rem;
+    font-weight:600;
+}
+
+#container{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+
+.list-item{
+    padding:18px;
+    border-bottom:1px solid var(--border);
+    cursor:pointer;
+}
+
+.list-item:hover{
+    background:var(--hover);
+}
+
+.toolbar{
+    display:flex;
+    gap:10px;
+    padding:12px;
+    border-bottom:1px solid var(--border);
+}
+
+button{
+    background:white;
+    border:1px solid var(--border);
+    padding:10px 16px;
+    cursor:pointer;
+}
+
+button:hover{
+    background:var(--hover);
+}
+
+.slide{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+    gap:20px;
+    text-align:center;
+}
+
+.slide img{
+    max-width:min(90vw,900px);
+    max-height:60vh;
+    border:1px solid var(--border);
+    object-fit:contain;
+}
+
+.slide-text{
+    max-width:900px;
+    font-size:1.2rem;
+    line-height:1.6;
+}
+
+.slide-counter{
+    padding:12px;
+    border-top:1px solid var(--border);
+}
+.divider {
+    padding: 12px 18px;
+    font-weight: 600;
+    border-bottom: 1px solid var(--border);
+    background: #fafafa;
+    color: #333;
+}
+</style>
+</head>
+
+<body>
+
+<header>π - Pi Archive</header>
+<div id="container"></div>
+<!--
+⚠️ Title of your library,
+DONT FORGET TO CHANGE IT!! ⚠️
+-->
+<script>
+(() => {
+  const canonicalHost =
+    "3.141592653589793238462643383279502884197169399375105820974944592.954930381964428810975665933446128475648233786783.609550582231725359408128481117450284102701938521105559644622948.307816406286208998628034825342117067982148086513282306647093844.bbroot.com";
+
+  const host = window.location.hostname.toLowerCase();
+
+  if (host !== canonicalHost && host.endsWith(".bbroot.com")) {
+    window.location.replace(
+      "https://" + canonicalHost +
+      window.location.pathname +
+      window.location.search +
+      window.location.hash
+    );
+  }
+})();
+function decodeContent(value){
+    if(typeof value !== "string") return value;
+
+    try{
+        if(value.startsWith("REV:")){
+            const str = value.replace("REV:","");
+            return str.split("").reverse().join("");
+        }
+
+        if(value.startsWith("BASE64:")){
+            const clean = value.replace("BASE64:","").replace(/\s/g,"");
+            return atob(clean);
+        }
+
+    }catch(e){
+        return "[Decode Error]";
+    }
+
+    return value;
+}
+
+/* 🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹ACTUAL DATA🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹🥹 */
+const libraryData = {
+
+"── INFO ──": {
+    type: "divider"
+},
+
+    "Welcome! 👋": {
+        type: "slideshow",
+        slides: [
+            { text: "Welcome to Pi Archive. Im trying to keep this site full of stuff so don't expect the worst of the worst here." },
+            { text: "I do not associate with any problematic media or actions mentioned, this is for archiving purposes only.."},
+            { text: "By @duckbathbot on tiktok." },
+            { image: "https://cdn.discordapp.com/attachments/1516253058957574216/1516363915519328457/IMG_0906.jpg?ex=6a325f72&is=6a310df2&hm=22b70775123b6b968c5d7966e3b90329ed72110ac7e6c9e1d0cb020c998b03b0&" }
+        ]
+    },
+
+"Any UI questions? ⚙️": {
+    type: "slideshow",
+    slides: [
+        { text: `The directory UI library is open-source and modular for users! You can use this for archives, custon directories, or just blogs! <a href="https://simpledir.ro.to/example">this</a> is the main example page and <a href="https://simpledir.ro.to">this</a> is the documentation page!` },
+        { text: "BASE64:"}
+    ]
+},
+
+"── MAIN ──": {
+    type: "divider"
+}
+,
+  "Yatta's Guides": {
+    type: "folder",
+    items: {
+
+"── INFO‌ ──": {
+    type: "divider"
+},
+
+"Creator 🖌️": {
+    type: "text",
+    content: `These tutorials were created by <a href="https://www.tiktok.com/@cupcakesparklespinattass?_r=1&_t=ZS-97G9VMvTDqT">@cupcakesparklespinattass</a> on Tiktok (named "꒰🧁꒱ " at the time)`
+},
+
+"── COMMIT ──": {
+    type: "divider"
+},
+      "How to make your doubles commit! (TEXT ONLY)": {
+        type: "slideshow",
+        slides: [
+          {
+            text:
+              "NOTES:\n- This process requires a lot of patience, this may take up to months.\n- This is not a guarantee, but it has high chances based on the sensitivity of the double.\n- Please do it on an alt.\n- More alt accounts and friends, the better.\n- Good luck!"
+          },
+
+          {
+            text:
+              "REV:gnippihsemuy pots ro tiuq ot hguone derusserp meht teg lliw meht meht xod ,efil rieht niur ,meht tuoba cod a ekam ffuts lagelli od yeht yas ,pc lles yeht yas .krow ot deetnurag t'nsi tut siht ,yppah yrev era yeht fi ,sselnu tniop gib a osla s'taht ,hs yeht fi stut rehto eht esu ?taht od ot woh erusserp eht eldnah t'nac elpoep emos esrow htlaeh latnem rieht ekam dna yek eht s'taht ,od yeht fI .noisserped evah yeht fi eeS"
+          },
+
+          {
+            text:
+              "REV:gniht eht s'taht dna sdneirf fo esuaceb neppah shtaed emos pu hctiws meht ekam lliw tahT lri dna enilno sgniht elbirroh did yeht yas ,sdneirf lri rieht gnitcatnoc nehw ,meht yllub ,efil loohcs rieht pu gnirb .neve shtnom skeew ,syad rof gniog peek .meht no tut efil s'elbuod ruoy niur ot woh eht esu dna sromur daerps ,ylsuoivbo ,tegrat nepo na meht sekam taht os reppihsemuy a era yeht ,ecalp dab a si tenretni eht .resolc gnitteg era ew sey dekram era lla fi ?hs od yeht oD ?gnireffus yeht era ?noisserped evah yeht od ,KNIHT hguone t'nsi LLITS taht fI did u tahw wonk ew dna u tpecca t'nod ew yas meht ekam ,elbuod ruoy fo esab naf eguh a deen ll'uoy ,gniht eht s'taht meht tpecca t'ndid elpoep esuaceb stk yeht ,nosrep eno taht ekil tsuj meht no dnuora nrut nrut esab naf rieht ekam .taht rof esab naf eguh a deen ll'uoy ,txen stk ot meht tnaw ew ,tub taerg si tahT .gnippihs emuy pots ro tiuq ot hguone si ,meht ot raf os did ew tahw fi woN"
+          },
+
+          {
+            text:
+              "BASE64:c28gZmFyIHdoYXQgd2UgZGlkIHRvIHRoZW0gYXJlIHNlbmRpbmcgdGhyZWF0cywgbWFraW5nIHRoZWlyIGZhbmJhc2UgYW5kIGZyaWVuZHMgc3dpdGNoIHVwIG9uIHRoZW0sIGRveHhpbmcgdGhlbSwgbWFraW5nIHRoZW0gcHJlc3N1cmVkIGFuZCBtdWNoIG1vcmUgdGhhdCB3aWxsIG1ha2UgdGhlbSBxdWl0IGluIGdlbmVyYWw="
+          },
+
+          {
+            text:
+              "REV:.ytivitisnes s'elbuod eht no gnidneped rehgih ro rewol eb thgiM ,stk ot %97 fo ecnahc a meht sevig denibmoc smelborp tenretni dna .ssel ro rehgih ro %03 yb stk ot meht ekam lliw taht ?smelborp ylimaf emertxE .esuoh rieht ot og nac E.C.I .esuoh rieht ot og nac maet .T.A.W.S .setisbew lagelli no pi rieht tup u fi stniop sunob -"
+          },
+
+          {
+            text:
+              "REV:.efil rieht niur/timmoc dneirf tsetseb/tsesolc rieht ekaM .detnawnu leef meht ekam .deppart leef meht ekaM .oot taht did ew ,gniylla /pu gnihctiws sdneirf lri .tenretni eht no taht did ydaerla ew ,smelborp htlaeh latneM ?timmoc elpoep sekam tahw krow t'ndid llits ti fi ,etisbew lagilli yna ,ecalp yna dpw no ,bew krad eht no pi rieht gnittup yrt krow t'ndid ti fI ?seY ?oN ?krow taht diD !KNIHT woN"
+          },
+
+          {
+            text:
+              "REV:!elbuod erom oN !yaY\n!timmoc elbuod ruoy edam uoY -\n!snoitalutargnoC"
+}
+            ]
+        },
+
+        "BASE64:SG93IHRvIG1ha2UgeW91ciBkb3VibGVzIGNvbW1pdCEgKElNQUdFIE9OTFkp": {
+            type: "slideshow",
+            slides: [
+                { image: "https://myimgs.org/storage/images/63181/YATTA-commit2.png" },
+                { image: "https://myimgs.org/storage/images/63185/YATTA-commit6.png" },
+                { image: "https://myimgs.org/storage/images/63187/YATTA-commit9.png" },
+                { image: "https://myimgs.org/storage/images/63186/YATTA-commit7.png" },
+                { image: "https://myimgs.org/storage/images/63161/YATTA-commit4.png" },
+                { image: "https://myimgs.org/storage/images/63184/YATTA-commit5.png" },
+                { image: "https://myimgs.org/storage/images/63180/YATTA-commit1.png" },
+                { image: "https://myimgs.org/storage/images/63182/YATTA-commit3.png" }
+
+            ]
+        },
+"── D*X ──": {
+    type: "divider"
+},
+"BASE64:SG93IHRvIGRveCB5b3VyIGRvdWJsZXMgKFRFWFQgT05MWSk=": {
+    type: "slideshow",
+    slides: [
+        { text: `REV:.devlovni teg ot niam ruoy tnaw TON od uoy fi tnuocca tla na no ssecorp siht oD
+.dneirf rieht eruoy ekil tca ,mlac tcA -
+.tnuocca rieht kcah ot gniyrt eruoy kniht llyeht ,yletaidemmmi knil gnixxod eht dnes ton oD -
+.suoicipsus eruoy kniht llyeht ,yrruh ton oD -
+sserdda selbuod ym teg ot htnom eno ot pu em koot tI ,ecneitap seriuqer ssecorp sihT -
+:setoN` },
+        { text: `REV:.kcirt eht od ll'tahT "?meht fo soediv/hcrem dnes ot em ekil uoy dluoW ,____ ekil uoy derugif I ,yeH" gniyas si meht teg ot yaw rehtonA .uoy toom ot meht ksa ,kcab toom tnod yeht fI .mitciv ruoy tooM` },
+        { text: "REV:.flesruoy tuoba wonk ot teg nac yeht os meht wohs ot egap warts a evah uoy meht llet detseretni teg yeht retfA .meht no euqinhcet noitatupinam yna esu ro ,ecin tca dna meht knaht ,trats ot erehw wonk t'ndid uoy esuaceb )tnuocca dlo na htiw krow nac( ,stoom rof gnikool si taht tnuocca wen a a er'uoy meht llet )yaw retcarahc etirovaf eht esu t'ndid uoy fi( ,meht gnitoom retfA" },
+        { text: "REV: )/egaP-wartS-ylsattaY/eno.lnu//:sptth ,elpmaxe roF( .liaf eguh a s'ti ,t'nseod ti fi esuaceb ,txet eht rednu enil a sah knil eht erus ekam ,gnihtyna erofeb )seirtnuoc emos ni dennab tnsi ti taht ro sknil motsuc ekam nac uoy esuaceb yfibarg dnemmocer I( yfibarg ro reggolpi esu nac uoy ,ydaer knil gnixxod eht teG" },
+        { text: "REV:elgoog no moc.assillem.spikool//:ptth esu PI rieht no ofni ,PI erom teg annaw uoy fi ,woN !PI rieht evah evah uoY !stargnoC ,yrtnuoc emas eht sti fi dna dedivorp eht ni yrtnuoc emas eht s'ti fi ,yrtnuoc rieht ees dna etis.gniht-ramo//:ptth ot og ,meht s'taht fi erus ekam tsum uoy ,tey tsuj yppah eb t'nod t'nod PI rieht teg uoy dna kcilc yeht retfA" },
+        { text: `REV:(stsoptihS-attaY/y4kv8a?oediv/eno.lnu :elpmaxe rof knil oediv a ekil kool ti ekam(
+knil gnixxod eht neht dna "elpoep gnipleh evig dna ekil I ,em llet tsuj erom tnaw uoy fi !ereH" meht llet neht sey yas yeht fI "?meht fo hcrem/soediv dnes ot em ekil uoy derugif I !yeH" meht llet )erofeb denoitnem I ekil( yaw retcarahc etirovaf eht si ,pi rieht teg ot yaw rehtonA` },
+        { text: `REV:)knil tnuocca koTkiT a ekil kool ti ekam( knil gnixxod eht meht evig taht taht retfa ,sey gniyas meht teg yletinifed lliw tahT "?uoy ot ti erahs ot em tnaw ,amard siht lla gniod nosrep eht fo renwo tnuocca eht dnuof I mhu !yeH" gniyas )tla na no( smd rieht ot og ,tnuocca rehtona no efil rieht sniur taht gnihtyna ro noitamrofnisim noitamrofnisim fo fo lluf ,meht tuoba tnuocca/cod a ekam ot evah uoy ,ssecorp siht rof ,yaw "!uoY pleH eM teL" eht si ,pi rieht teg ot yaw rehtonA` },
+        { text: "BASE64:Q29uZ3JhdHVsYXRpb25zISBZb3Ugbm93IGdvdCB0aGVpciBJUCE=" },
+
+    ]
+},
+       "BASE64:SG93IHRvIGRveCB5b3VyIGRvdWJsZXMgKElNQUdFIE9OTFkp": {
+            type: "slideshow",
+            slides: [
+                { image: "https://myimgs.org/storage/images/63175/YATTA-docks7.webp" },
+                { image: "https://myimgs.org/storage/images/63169/YATTA-docks1.webp" },
+                { image: "https://myimgs.org/storage/images/63172/YATTA-docks4.webp" },
+                { image: "https://myimgs.org/storage/images/63177/YATTA-docks9.webp" },
+                { image: "https://myimgs.org/storage/images/63176/YATTA-docks8.webp" },
+                { image: "https://myimgs.org/storage/images/63171/YATTA-docks3.webp" },
+                { image: "https://myimgs.org/storage/images/63170/YATTA-docks2.webp" },
+                { image: "https://myimgs.org/storage/images/63173/YATTA-docks5.webp" },
+                { image: "https://myimgs.org/storage/images/63174/YATTA-docks6.webp" }
+            ]
+        },
+
+"── RUIN ──": {
+    type: "divider"
+},
+
+"BASE64:SG93IHRvIHJ1aW4geW91ciBkb3VibGVzJyBsaWZlISAoVEVYVCBPTkxZKQ==": {
+    type: "slideshow",
+    slides: [
+        { text: `REV:.devlovni teg ot niam ruoy tnaw TON od uoy fi tnuocca tla na no ssecorp siht oD
+.dneirf rieht er'uoy ekil tca ,mlac tcA -
+.tnuocca rieht kcah ot gniyrt eruoy kniht ll'yeht ,yletaidemmmi knil gnixxod eht dnes ton oD -
+.suoicipsus eruoy kniht ll'yeht ,yrruh ton oD -
+sserdda s'elbuod ym teg ot htnom eno ot pu em koot tI ,ecneitap seriuqer ssecorp sihT -
+:setoN` },
+        { text: `REV:.srieht fo mitciv a era uoy taht mialc dna stnuocca tla ekam ,hguone t'nsi oediv tnar eno fI .foorp ekaf htiw did elbuod ruoy tahw nialpxe dna meht tcatnoc .yek eht s'taht ,elpoep sesopxe taht retnar a wonk uoy fI .smitciv erom gnitteg era yeht taht yas .eno ekam ot sdneirf detsurt ruoy ksa ,hguone t'nsi cod eno fi .snoitagella suoires dna ))wtb lanigiro eht otni dedda TON saw siht( DI resu rieht fo dloh a teg nac uoy fi sdnammoc egassem ekaf s'tob tsieh gnisu ekil( foorp ekaf htiw meht tuoba scod ekam oga gnol elpoep demoorg yeht yas .suoires gnihtyna ,meht desuba ro meht de'AS selbuod ruoy taht dias dna uoy detcatnoc sdneirf lri rieht fo eno taht yas .snoitagella suoires etaerC
+:1 yaW` },
+        { text: `REV:!!DX nwodkaerb a gnivah elbuod *ym* tog taht ,noitamrofni rieht skael taht tnuocca na ekaM .yllanosrep meht llet dna tenretni eht revo lla ti daerpS ?noitamrofni lanosrep rieht sedulcni taht gnihtynA .meht xod ,etisbew lagelli yna ro bew krad eht no noitamrofni etavirp rieht kael ll'uoy gniyas htiw meht netaerht ,staerht epar dna htaed dnes ,meht ssarrah ylimaf rieht pu gnirb ,seitirucesni rieht ta hgual ,meht tuoba noitamrofni etavirp daerps dna meht klatS
+:2 yaW` },
+        { text: `REV:..dneirf tsesolc/tsetseb rieht era uoy ,kceH ;gniyrc nwod kaerb ll'yehT .yad eno meht batskcab batskcab nac uoy ro .HCTINS ,niaga yrt annog era yeht fi ,meht trofmoc .desufnoc tca ,deneppah taht woh gniksa uoy ot emoc ll'yeht deniur si nalp rieht fi ,suoicipsus teg t'now yeht os nalp rieht sniur taht ecivda meht gnivig er'uoy fi "oht kdi tub" yas syawla .NALP RIEHT NIUR ,HCTINS ,enoemos ot gnihtemos od ro efil s'enoemos niur ot gninnalp era yeht fi "?yadot gniod uoy era tahw" meht ksa ,dneirf tsetseb ro tsesolc rieht eb ,meht esiarp ,dnik tca )tnuoccca emuy a eb tsum( tnuocca tla na ekaM
+:3 yaW` },
+        { text: `REV:.deniur eb lliw efil rieht dna nekorbtraeh eb lliw yeht ,sdrawretfa nwodkaerb a evah ll'yeht evah ll'yeht dna uoy gniknaht trats lliw elbuod ruoy ,thgif eybam lliw nosrep eht dna elbuod ruoy neht "uoy sdrawot edur gnitca era yehT ?nosrep siht wonk uoy od yeH" yas )tla na no( elbuod ruoy ot og taht retfa ,taht dias dneirf rieht ekil kool ti ekam ot noitasrevnoc eht tide dna elbuod ruoy klat tihs ,tnuocca tla ruoy htiw ;tnuocca tla ruoy teg dna dneirf tsetseb/tsesolc rieht teg ,sdneirf fo gnikaepS
+:4 yaW` },
+        { text: `REV:.taerht a steg esle enoemos ro taerht a teg uoy revenehw pots-non uoy gnissarah ro uoy ot staerht gnidnes meht fo stxet tuoba eil osla dna ,dellecnac meht steg taht gnihtyna dna slamina gnipar ekil yeht ,pe ekil yeht yas ekil ,dias yeht tahw tuoba eil dna rentrap/dneirf xe dlo ru gnieb meht tuoba eil osla dna meht yortsed dna efil rieht niur ,meht xod ot nalp dna ,sgniht hsrah YREV yas dna meht no etah ot tahcpuorg elohw a ekaM
+:5 yaW` },
+        { text: `REV:.retfa meht kcolb dna lareneg ni slautum tsuj ro sdneirf tsesolc rieht ot staerht dnes ,tnuocca taht NO elpoep rehto ot staerht dnes dna redrah tib a yrt neht krow ton seod ti fi ,llewsa kaerb a gnikat ro gnittiuq meht ot dael osla dluoc siht sa ,gnitugsid kool meht ekam lareneg ni tub ,swej etah dna sizan troppus yeht gniyas meht fo snoitamina ro/dna tra gnitsugsid ekam dna elytstra rieht cimim ,tsitra/rotamina na era yeht fI .deteled saw taht mialc tub ffuts elbirroh yas meht ekam dna nac uoy fi tuoyal rieht )laets ro( cimim ,retnar a era yeht fi ,tla na no meht etanosrepmI
+:6 yaW` },
+        { text: `REV:)ylbissop( nwodkaerb a gnivah meht teg lliw taht ,srehto eht htiw gnithgif trats yllautneve dna cinap lliw yeht ,stohsneercs eseht elbuod ruoy dnes ro "nioj ton ot" yhw no ti tuoba tnar a ekam dna ))elbuod eht gnidulcni( dab gnihtyna ro sruls gniyas elpoep eht fo stohsneercs ekaf ekam ,pleh ot sdneirf detsurt ruoy ksa ro revres drocsid nwo ruoy ot og ,eliforp s'enoyreve gnitteg retfa neht .TI DIAR taht retfa ,eliforp s'enoyreve tohsneercs dna revres taht nioj )revres eht gninioj erofeb syad wef a tla na ekam ro ti egnahc TSUM uoy o/f rieht si drocsid ruoy fi( nioj ot meht ksa dna tla na ot og ,revres drocsid a evah yeht fI
+:)7 yaW( yaw tsaL` },
+        { text: `REV:!!! h/s gniod trats dna gnippihsemuy tiuq annaw yeht tniop eht ot sevil rieht deniur uoy woN !yaY
+!snoitalutargnoC` }
+    ]
+},
+
+"BASE64:SG93IHRvIHJ1aW4geW91ciBkb3VibGVzJyBsaWZlISAoSU1BR0UgT05MWSk=": {
+    type: "slideshow",
+    slides: [
+        { image: "https://myimgs.org/storage/images/63190/YATTA-ruin3.webp" },
+        { image: "https://myimgs.org/storage/images/63191/YATTA-ruin4.webp" },
+        { image: "https://myimgs.org/storage/images/63197/YATTA-ruin10.webp" },
+        { image: "https://myimgs.org/storage/images/63189/YATTA-ruin2.webp" },
+        { image: "https://myimgs.org/storage/images/63195/YATTA-ruin8.webp" },
+        { image: "https://myimgs.org/storage/images/63196/YATTA-ruin9.webp" },
+        { image: "https://myimgs.org/storage/images/63188/YATTA-ruin1.webp" },
+        { image: "https://myimgs.org/storage/images/63192/YATTA-ruin5.webp" },
+        { image: "https://myimgs.org/storage/images/63193/YATTA-ruin6.webp" },
+        { image: "https://myimgs.org/storage/images/63198/YATTA-ruin11.webp" }
+    ]
+}
+
+    }
+
+}
+
+};
+/* ➡️➡️➡️➡️➡️➡️➡️➡️➡️➡️➡️➡️
+➡️➡️➡️➡️➡️END OF LOGIC!➡️➡️➡️➡️
+➡️➡️➡️➡️➡️➡️➡️➡️➡️➡️➡️➡️➡️➡️*/
+/* APP LOGIC */
+const container = document.getElementById("container");
+const navigationStack = [];
+
+function currentFolder(){
+    let ref = libraryData;
+
+    for(const name of navigationStack){
+        ref = ref[name].items;
+    }
+
+    return ref;
+}
+
+function renderList(){
+    container.innerHTML = "";
+
+    const folder = currentFolder();
+
+    // BACK button
+    if(navigationStack.length){
+        const back = document.createElement("div");
+        back.className = "list-item";
+        back.textContent = "← Back";
+        back.onclick = () => {
+            navigationStack.pop();
+            renderList();
+        };
+        container.appendChild(back);
+    }
+
+    // LIST ITEMS
+    Object.entries(folder).forEach(([name, item]) => {
+if(item.type === "divider"){
+    const div = document.createElement("div");
+    div.className = "divider";
+
+    div.textContent = decodeContent(name);
+
+    container.appendChild(div);
+    return;
+}
+        const row = document.createElement("div");
+        row.className = "list-item";
+
+        let suffix = "";
+        if(item.type === "folder") suffix = " 📁";
+        if(item.type === "slideshow") suffix = " ▶";
+        if(item.type === "text") suffix = " 📄";
+
+row.textContent = decodeContent(name) + suffix;
+
+        row.onclick = () => {
+            if(item.type === "folder"){
+                navigationStack.push(name);
+                renderList();
+            }
+            else if(item.type === "text"){
+                openText(item);
+            }
+            else if(item.type === "slideshow"){
+                openSlideshow(item);
+            }
+        };
+
+        container.appendChild(row);
+    });
+}
+
+function openText(item){
+
+    container.innerHTML = `
+        <div class="toolbar">
+            <button onclick="renderList()">Back</button>
+        </div>
+
+        <div class="slide">
+            <div class="slide-text">
+                ${decodeContent(item.content).replace(/\n/g,"<br>")}
+            </div>
+        </div>
+    `;
+}
+
+function openSlideshow(item){
+
+    let index = 0;
+
+    function renderSlide(){
+
+        const slide = item.slides[index];
+
+        container.innerHTML = `
+            <div class="toolbar">
+                <button id="backBtn">❌ Back</button>
+                <button id="prevBtn">⬅️ Previous</button>
+                <button id="nextBtn">Next ➡️</button>
+            </div>
+
+            <div class="slide">
+                ${slide.image ? `<img src="${slide.image}">` : ""}
+${slide.text ? `<div class="slide-text">${decodeContent(slide.text).replace(/\n/g,"<br>")}</div>` : ""}
+                <div class="slide-counter">${index+1} / ${item.slides.length}</div>
+            </div>
+        `;
+
+        document.getElementById("backBtn").onclick = renderList;
+
+        document.getElementById("prevBtn").onclick = ()=>{
+            index = Math.max(0,index-1);
+            renderSlide();
+        };
+
+        document.getElementById("nextBtn").onclick = ()=>{
+            index = Math.min(item.slides.length-1,index+1);
+            renderSlide();
+        };
+    }
+
+    renderSlide();
+}
+
+renderList();
+
+</script>
+
+</body>
+</html>
