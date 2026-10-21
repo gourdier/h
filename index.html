@@ -119,13 +119,17 @@ button:hover{
 DONT FORGET TO CHANGE IT!! ⚠️
 -->
 <script>
+
 (() => {
   const canonicalHost =
     "3.141592653589793238462643383279502884197169399375105820974944592.307816406286208998628034825342117067982148086513282306647093844.60955058223172535940812848111745028410270193852110555964.4622948954930381964428810975665933446128475648233786783165.cc.cd";
 
   const host = window.location.hostname.toLowerCase();
 
-  if (host !== canonicalHost && host.endsWith(".bbroot.com")) {
+  if (
+    host !== canonicalHost &&
+    host.endsWith(".cc.cd")
+  ) {
     window.location.replace(
       "https://" + canonicalHost +
       window.location.pathname +
@@ -134,6 +138,7 @@ DONT FORGET TO CHANGE IT!! ⚠️
     );
   }
 })();
+
 function decodeContent(value){
     if(typeof value !== "string") return value;
 
